@@ -58,7 +58,7 @@ test_image_gen = image_gen.flow_from_directory('DATA/test',
 
 train_image_gen.class_indices
 
-results = model.fit_generator(train_image_gen,epochs=100,
+results = model.fit_generator(train_image_gen,epochs=200,
                               steps_per_epoch=150,
                               validation_data=test_image_gen,
                               validation_steps=12)
@@ -66,8 +66,6 @@ results = model.fit_generator(train_image_gen,epochs=100,
 model.save('model.h5')
 
 plt.plot(results.history['acc'])
-
-
 
 
 
