@@ -34,5 +34,47 @@ model.compile(loss='binary_crossentropy',
 
 model.summary()
 
+from keras.preprocessing.image import ImageDataGenerator
+
+train_datagen = ImageDataGenerator(rotation_range = 180,
+                               width_shift_range = 0.1,
+                               height_shift_range = 0.1,
+                               rescale= 1/255,
+                               shear_range = 0.2,
+                               zoom_range = 0.2,
+                               horizontal_flip = True,
+                               vertical_flip = True,
+                               fill_mode = 'nearest'
+                               )
+
+test_datagen = ImageDataGenerator(rescale= 1/255)
+
+train_set = train_datagen.flow_from_directory('DATA/train',
+                                              target_size=(256, 256),
+                                              batch_size=16,
+                                              class_mode='binary')
+
+
+test_set = test_datagen.flow_from_directory('DATA/test',
+                                            target_size=(256, 256),
+                                            batch_size=16,
+                                            class_mode='binary')
+
+
+train_set.class_indices
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
