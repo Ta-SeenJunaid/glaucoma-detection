@@ -4,19 +4,19 @@ from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 
 model = Sequential()
 
-model.add(Conv2D(filters=3, kernel_size=(11,11), input_shape=(150, 150, 3), 
+model.add(Conv2D(filters=3, kernel_size=(11,11), input_shape=(256, 256, 3), 
                  activation='relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
 
-model.add(Conv2D(filters=96, kernel_size=(5, 5), input_shape=(150, 150, 3), 
+model.add(Conv2D(filters=96, kernel_size=(5, 5), input_shape=(256, 256, 3), 
                  activation='relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
 
-model.add(Conv2D(filters=192, kernel_size=(3, 3), input_shape=(150, 150, 3), 
+model.add(Conv2D(filters=192, kernel_size=(3, 3), input_shape=(256, 256, 3), 
                  activation='relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
 
-model.add(Conv2D(filters=192, kernel_size=(3, 3), input_shape=(150, 150, 3), 
+model.add(Conv2D(filters=192, kernel_size=(3, 3), input_shape=(256, 256, 3), 
                  activation='relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
 
@@ -50,20 +50,20 @@ train_datagen = ImageDataGenerator(rotation_range = 180,
 test_datagen = ImageDataGenerator(rescale= 1/255)
 
 train_set = train_datagen.flow_from_directory('DATA/train',
-                                              target_size=(150, 150),
+                                              target_size=(256, 256),
                                               batch_size=16,
                                               class_mode='binary')
 
 
 test_set = test_datagen.flow_from_directory('DATA/test',
-                                            target_size=(150, 150),
+                                            target_size=(256, 256),
                                             batch_size=16,
                                             class_mode='binary')
 
 
 train_set.class_indices
 
-results = model.fit_generator(train_set,epochs= 1,
+results = model.fit_generator(train_set,epochs= 200,
                               steps_per_epoch=150,
                               validation_data=test_set,
                               validation_steps=12)
